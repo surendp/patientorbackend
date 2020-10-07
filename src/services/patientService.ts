@@ -1,7 +1,7 @@
 import patients from '../../data/patients';
 import {
   NewPatient,
-  NonSensitivePatientInfo,
+  PublicPatient,
   Patient,
 } from '../types';
 
@@ -9,7 +9,7 @@ const getPatients = (): Patient[] => {
   return patients;
 };
 
-const getNonSensitivePatients = (): NonSensitivePatientInfo[] => {
+const getPublicPatient = (): PublicPatient[] => {
   return patients.map(({
     id,
     name,
@@ -25,6 +25,11 @@ const getNonSensitivePatients = (): NonSensitivePatientInfo[] => {
   }));
 };
 
+const getPublicPatientById = (id: string): PublicPatient | undefined => {
+  const patient = patients.find(p => p.id === id);
+  return patient;
+};
+
 const addPatient = (patient: NewPatient): Patient => {
   const id = `${Math.floor(Math.random() * 10000)}`;
   const newPatient = {
@@ -38,5 +43,6 @@ const addPatient = (patient: NewPatient): Patient => {
 export default {
   addPatient,
   getPatients,
-  getNonSensitivePatients
+  getPublicPatient,
+  getPublicPatientById
 };

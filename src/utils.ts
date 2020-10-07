@@ -22,6 +22,10 @@ const toNewPatient = (obj: any): NewPatient => {
   } as NewPatient;
 };
 
+const toPatientId = (id: any): string => {
+  return parseString(id, `Incorrect or Missing Id, ${id}`);
+};
+
 const parseString = (str: any, errorMessage: string): string => {
   if (!str || !isString(str)) {
     throw new Error(errorMessage);
@@ -67,4 +71,7 @@ const isGender = (gender: any): gender is Gender => {
   return Object.values(Gender).includes(gender);
 };
 
-export { toNewPatient };
+export {
+  toNewPatient,
+  toPatientId
+};

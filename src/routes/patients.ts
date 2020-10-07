@@ -1,10 +1,21 @@
 import express from 'express';
 import patientService from '../services/patientService';
-import { toNewPatient } from '../utils';
+import { toPatientId, toNewPatient } from '../utils';
 const patientsRouter = express.Router();
 
 patientsRouter.get('/', (_req, res) => {
-  res.send(patientService.getNonSensitivePatients());
+  res.send(patientService.getPublicPatient());
+});
+
+patientsRouter.get('/:id', (req, res) => {
+  try {
+    const id = toPatientId(req.params.id);
+    res.send(patientService.getPublicPatientById(id));
+  } catch (error) {
+    res.status(400).json({
+      error: (error as Error).message,
+    });
+  }
 });
 
 patientsRouter.post('/', (req, res) => {
