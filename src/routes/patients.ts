@@ -10,7 +10,7 @@ patientsRouter.get('/', (_req, res) => {
 patientsRouter.get('/:id', (req, res) => {
   try {
     const id = toPatientId(req.params.id);
-    res.send(patientService.getPublicPatientById(id));
+    res.send(patientService.getPatientById(id));
   } catch (error) {
     res.status(400).json({
       error: (error as Error).message,

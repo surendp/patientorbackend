@@ -25,7 +25,7 @@ const getPublicPatient = (): PublicPatient[] => {
   }));
 };
 
-const getPublicPatientById = (id: string): PublicPatient | undefined => {
+const getPatientById = (id: string): Patient | undefined => {
   const patient = patients.find(p => p.id === id);
   return patient;
 };
@@ -44,5 +44,5 @@ export default {
   addPatient,
   getPatients,
   getPublicPatient,
-  getPublicPatientById
+  getPatientById
 };

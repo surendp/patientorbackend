@@ -45,6 +45,7 @@ const data = [
 
 const patients: Array<Patient> = data.map(p => ({
     ...p,
+    entries: (p as Patient).entries || [],
     gender: p.gender as Gender,
 }));
 
