@@ -3,6 +3,8 @@ import {
   NewPatient,
   PublicPatient,
   Patient,
+  Entry,
+  NewEntry,
 } from '../types';
 
 const getPatients = (): Patient[] => {
@@ -40,8 +42,28 @@ const addPatient = (patient: NewPatient): Patient => {
   return newPatient;
 };
 
+const addEntry = (entry: NewEntry, patientId: Patient['id']): Entry => {
+  const index = patients.findIndex(p => p.id === patientId);
+
+  if (index === -1) {
+    throw new Error(`Patient with id '${patientId}' doesnot exist!!`);
+  }
+
+  const patient = patients[index];
+  const id = `${Math.floor(Math.random() * 10000)}`;
+  const newEntry = {
+    ...entry,
+    id
+  };
+
+  patient.entries.push(newEntry);
+  patients[index] = patient;
+  return newEntry;
+};
+
 export default {
   addPatient,
+  addEntry,
   getPatients,
   getPublicPatient,
   getPatientById
